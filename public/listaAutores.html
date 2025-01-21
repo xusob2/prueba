@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Autores</title>
+</head>
+<body>
+    <h1>Lista de Autores</h1>
+    <table id="autores">
+        <thead>
+            <tr>
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Nacionalidad</th>
+                <th>Fecha de Nacimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos de los autores se insertarán aquí -->
+        </tbody>
+    </table>
+    <script>
+        fetch('/listaAutores')
+            .then(response => response.json())
+            .then(autores => {
+                const tableBody = document.querySelector('#autores tbody');
+                autores.forEach(autor => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${autor.dni}</td><td>${autor.nombre}</td><td>${autor.nacionalidad}</td><td>${autor.fechaNacimiento}</td>`;
+                    tableBody.appendChild(row);
+                });
+            });
+    </script>
+</body>
+</html>

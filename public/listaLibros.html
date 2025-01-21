@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Libros</title>
+</head>
+<body>
+    <h1>Lista de Libros</h1>
+    <table id="libros">
+        <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Género</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos de los libros se insertarán aquí -->
+        </tbody>
+    </table>
+    <script>
+        fetch('/listaLibros')
+            .then(response => response.json())
+            .then(libros => {
+                const tableBody = document.querySelector('#libros tbody');
+                libros.forEach(libro => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${libro.isbn}</td><td>${libro.titulo}</td><td>${libro.autor}</td><td>${libro.genero}</td>`;
+                    tableBody.appendChild(row);
+                });
+            });
+    </script>
+</body>
+</html>
